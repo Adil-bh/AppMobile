@@ -1,7 +1,7 @@
 { 
   "type": "match",
   "format":"standAloneComplex",
-   "version":"10.7.1",
+   "version":"1",
    "data":[
     {
         "title": "Slavia-Mozyr - Torpedo-BelAZ",
