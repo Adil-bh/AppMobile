@@ -1,6 +1,8 @@
 package com.example.appmobile;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -9,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +27,40 @@ public class MainActivity extends Activity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-    makeApiCall();
+        sharedPreferences = getSharedPreferences("application_foot", Context.MODE_PRIVATE);
+        gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        List<Matchs> matchsList = getDataFromCache();
+
+        if(matchsList != null){
+            showList(matchsList);
+        } else {
+            makeApiCall();
+        }
+
     }
+
+    private List<Matchs> getDataFromCache(){
+        String jsonMatchs = sharedPreferences.getString(Constants.KEY_MATCH_LIST, null);
+
+        if(jsonMatchs == null){
+            return null;
+        } else {
+            Type listType = new TypeToken<List<Matchs>>(){}.getType();
+            return gson.fromJson(jsonMatchs, listType);
+        }
+
+    }
+
 
     private void showList(List<Matchs> matchsList) {
 
@@ -49,9 +79,7 @@ public class MainActivity extends Activity {
 
     private static final String BASE_URL = "https://raw.githubusercontent.com/Adil-bh/AppMobile/master/";
     private void makeApiCall(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -67,6 +95,7 @@ public class MainActivity extends Activity {
                 if(response.isSuccessful() && response.body() != null){
                     List<Matchs> matchsList = response.body().getResults();
                     Toast.makeText(getApplicationContext(), "API Success", Toast.LENGTH_SHORT).show();
+                    saveList(matchsList);
                     showList(matchsList);
                 } else {
                     showError();
@@ -78,6 +107,19 @@ public class MainActivity extends Activity {
                 showError();
             }
         });
+
+    }
+
+    private void saveList(List<Matchs> matchsList) {
+
+
+        String jsonString = gson.toJson(matchsList);
+        sharedPreferences
+                .edit()
+                .putString(Constants.KEY_MATCH_LIST, jsonString)
+                .apply();
+
+        Toast.makeText(this, "List saved", Toast.LENGTH_SHORT).show();
 
     }
 
