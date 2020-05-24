@@ -1,9 +1,9 @@
 package com.example.appmobile.presentation.view;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,7 +14,6 @@ import com.example.appmobile.Singletons;
 import com.example.appmobile.presentation.controller.MainController;
 import com.example.appmobile.presentation.model.Matchs;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
@@ -55,12 +54,22 @@ public class MainActivity extends Activity {
 
 
         // define an adapter
-        mAdapter = new ListAdapter(matchsList);
+        mAdapter = new ListAdapter(matchsList, new ListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Matchs item) {
+                controller.onItemClick(item);
+            }
+        });
         recyclerView.setAdapter(mAdapter);
 
     }
 
     public void showError() {
         Toast.makeText(getApplicationContext(), "API Error", Toast.LENGTH_SHORT).show();
+    }
+
+    public void navigateToDetails(Matchs matchs) {
+        Toast.makeText(getApplicationContext(), "TODO Navigate", Toast.LENGTH_SHORT).show();
+
     }
 }

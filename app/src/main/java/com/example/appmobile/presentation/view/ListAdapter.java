@@ -20,8 +20,14 @@ import com.example.appmobile.R;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    private List<Matchs> values;
+    private final List<Matchs> values;
     private Dialog myDialog;
+    private OnItemClickListener listener;
+
+
+    public interface OnItemClickListener {
+        void onItemClick(Matchs item);
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -33,6 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
          ImageView image;
          VideoView video;
          View layout;
+
 
 
          ViewHolder(View v) {
@@ -58,9 +65,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<Matchs> myDataset) {
-        values = myDataset;
+    public ListAdapter(List<Matchs> myDataset, OnItemClickListener listener) {
+        this.values = myDataset;
+        this.listener = listener;
     }
+
+
 
     // Create new views (invoked by the layout manager)
     @Override
@@ -87,6 +97,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             public void onClick(View v) {
                 showPopup(currentMatch);
                 //remove(position);
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                listener.onItemClick(currentMatch);
             }
         });
 

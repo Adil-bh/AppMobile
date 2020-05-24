@@ -91,4 +91,8 @@ public class MainController {
         }
 
     }
+
+    public void onItemClick(Matchs matchs) {
+        view.navigateToDetails(matchs);
+    }
 }
