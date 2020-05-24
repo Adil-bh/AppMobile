@@ -1,4 +1,8 @@
-package com.example.appmobile;
+package com.example.appmobile.presentation.model;
+
+import com.example.appmobile.presentation.model.Competition;
+import com.example.appmobile.presentation.model.Side;
+import com.example.appmobile.presentation.model.Video;
 
 import java.util.List;
 
@@ -7,12 +11,20 @@ public class Matchs {
     private String title;
     private String embed;
     private String url;
+    private String urlVideo;
     private String thumbnail;
     private String date;
-    private Side side1;
-    private Side side2;
+    public Side side1;
+    public Side side2;
     private Competition competition;
-    private List<Video> video;
+    public List<Video> video;
+
+    public Matchs() {
+    }
+
+    public String getUrlVideo() {
+        return urlVideo;
+    }
 
     public String getTitle() {
         return title;

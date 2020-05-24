@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:padding="6dip"
-    android:onClick="ShowPopup">
+    android:onClick="showPopup">
 
     <ImageView
         android:id="@+id/icon"

@@ -1,4 +1,4 @@
-package com.example.appmobile;
+package com.example.appmobile.presentation.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,12 +9,16 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.appmobile.Constants;
+import com.example.appmobile.presentation.model.Matchs;
+import com.example.appmobile.R;
+import com.example.appmobile.data.FootAPI;
+import com.example.appmobile.presentation.model.RestMatchResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

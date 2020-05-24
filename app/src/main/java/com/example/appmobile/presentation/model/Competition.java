@@ -1,12 +1,17 @@
-package com.example.appmobile;
+package com.example.appmobile.presentation.model;
 
-public class Side {
+public class Competition {
 
     private String name;
+    private String id;
     private String url;
 
     public String getName() {
         return name;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getUrl() {
