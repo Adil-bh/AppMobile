@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appmobile.R;
+import com.example.appmobile.Singletons;
 import com.example.appmobile.presentation.controller.MainController;
 import com.example.appmobile.presentation.model.Matchs;
 import com.google.gson.Gson;
@@ -34,11 +35,10 @@ public class MainActivity extends Activity {
 
         controller = new MainController(
                 this,
-                new GsonBuilder()
-                .setLenient()
-                .create(),
-                getSharedPreferences("application_foot", Context.MODE_PRIVATE)
+                Singletons.getGson(),
+                Singletons.getSharedPreferences(getApplicationContext())
         );
+
         controller.onStart();
 
 
