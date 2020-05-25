@@ -1,6 +1,7 @@
 package com.example.appmobile.presentation.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.AdapterView;
@@ -69,7 +70,7 @@ public class MainActivity extends Activity {
     }
 
     public void navigateToDetails(Matchs matchs) {
-        Toast.makeText(getApplicationContext(), "TODO Navigate", Toast.LENGTH_SHORT).show();
-
+        Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
+        MainActivity.this.startActivity(myIntent);
     }
 }

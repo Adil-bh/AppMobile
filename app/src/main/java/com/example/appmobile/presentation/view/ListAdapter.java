@@ -92,17 +92,30 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         final Matchs currentMatch = values.get(position);
         holder.txtHeader.setText(currentMatch.getTitle());
         holder.txtFooter.setText(currentMatch.getDate());
-        holder.txtHeader.setOnClickListener(new OnClickListener() {
+        holder.image.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPopup(currentMatch);
-                //remove(position);
             }
         });
+                holder.txtHeader.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showPopup(currentMatch);
+                        //remove(position);
+                    }
+                });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 listener.onItemClick(currentMatch);
+            }
+        });
+
+        holder.txtFooter.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopup(currentMatch);
             }
         });
 
