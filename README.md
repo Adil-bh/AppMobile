@@ -3,7 +3,9 @@
 
 Projet application mobile utilisant la clean architecture et le pattern MVC codée en Java.
 
-La récupération de données s'effectue avec une API Rest. J'ai donc choisi comme API [Score Bat Video API](https://www.scorebat.com/video-api/)
+La récupération de données s'effectue avec une API Rest. 
+
+J'ai donc choisi comme API [Score Bat Video API](https://www.scorebat.com/video-api/)
 afin de récupérer des données sur les derniers matchs joués mais aussi ajouter une vidéo résumé du match.
 
 ## Prérequis
