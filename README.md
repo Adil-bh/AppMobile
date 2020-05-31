@@ -35,6 +35,8 @@ https://github.com/public-apis/public-apis
 ### Écran d'accueil
 
 - Affichage de la liste des matchs
+- Date de la rencontre
+- Logo du championnat
 
 |<img src="https://github.com/Adil-bh/AppMobile/blob/master/img_readme/liste.png" width="350"> |
 |----------------------------------------------------------------------------------------------|
@@ -47,7 +49,8 @@ https://github.com/public-apis/public-apis
 | <img src="https://github.com/Adil-bh/AppMobile/blob/master/img_readme/atletico_popup.png" width="350"> | <img src="https://github.com/Adil-bh/AppMobile/blob/master/img_readme/atleticofullscreen.png" width="350"> | <img src="https://github.com/Adil-bh/AppMobile/blob/master/img_readme/real_popup.png" width="350"> | 
 | ------------ | ------------- |------------- |
 
-### Mise en cache des données avec SharedPreferences
+### Mise en cache des données
 - Lecture des vidéos depuis internet
 - Mise de en cache de la mémoire
+
 
