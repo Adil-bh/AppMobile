@@ -13,6 +13,7 @@ import com.example.appmobile.R;
 import com.example.appmobile.presentation.controller.MainController;
 import com.example.appmobile.presentation.model.Matchs;
 import com.google.gson.Gson;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 
 public class DetailActivity extends Activity {
     private RecyclerView recyclerView;
@@ -28,7 +29,7 @@ public class DetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.custompopup);
 
 
         }

@@ -2,6 +2,7 @@ package com.example.appmobile.presentation.view;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -10,18 +11,27 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appmobile.presentation.model.Matchs;
 import com.example.appmobile.R;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerTracker;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements YouTubePlayer, YouTubePlayerListener {
     private final List<Matchs> values;
     private Dialog myDialog;
     private OnItemClickListener listener;
@@ -39,7 +49,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
          TextView txtHeader;
          TextView txtFooter;
          ImageView image;
-         YouTubePlayerView video;
+         YouTubePlayerView videoYT;
          View layout;
 
 
@@ -50,7 +60,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
             image = (ImageView) v.findViewById(R.id.icon);
-            video = (YouTubePlayerView) v.findViewById(R.id.videoYT);
+            videoYT = (YouTubePlayerView) v.findViewById(R.id.youtube_player_view);
             myDialog = new Dialog(v.getContext());
 
         }
@@ -73,10 +83,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
 
-
     // Create new views (invoked by the layout manager)
     @Override
-    public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
@@ -108,7 +117,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     }
                 });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new OnClickListener() {
             @Override public void onClick(View v) {
                 listener.onItemClick(currentMatch);
             }
@@ -120,7 +129,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 showPopup(currentMatch);
             }
         });
-
+        //Icônes competitions
         switch(currentMatch.getCompetition().getId()){
 
             case "10" :
@@ -164,9 +173,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
 
+
     @SuppressLint("CutPasteId")
     public void showPopup(final Matchs currentMatch) {
-        TextView title, date, side1, side2, txtclose;
+        TextView title, side1, side2, txtclose;
         ImageView side1Image, side2Image;
         YouTubePlayerView videoYT;
         myDialog.setContentView(R.layout.custompopup);
@@ -188,13 +198,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         side1Image = myDialog.findViewById(R.id.side1Image);
         side2Image = myDialog.findViewById(R.id.side2Image);
 
-        videoYT = myDialog.findViewById(R.id.videoYT);
-        //videoYT.set
 
         side1.setText(currentMatch.getSide1().getName());
         side2.setText(currentMatch.getSide2().getName());
         title.setText(currentMatch.getTitle());
 
+        YouTubePlayerView youTubePlayerView = myDialog.findViewById(R.id.youtube_player_view);
+
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                String videoId = ""+currentMatch.getUrlVideo();
+                youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
 
 
         //Logo Équipe à domicile
@@ -577,10 +594,117 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     }
 
+
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return values.size();
     }
+
+
+    @Override
+    public boolean addListener(YouTubePlayerListener youTubePlayerListener) {
+        return false;
+    }
+
+    @Override
+    public void cueVideo(String s, float v) {
+
+    }
+
+    @Override
+    public void loadVideo(String s, float v) {
+
+    }
+
+    @Override
+    public void mute() {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void play() {
+
+    }
+
+    @Override
+    public boolean removeListener(YouTubePlayerListener youTubePlayerListener) {
+        return false;
+    }
+
+    @Override
+    public void seekTo(float v) {
+
+    }
+
+    @Override
+    public void setVolume(int i) {
+
+    }
+
+    @Override
+    public void unMute() {
+
+    }
+
+
+
+    @Override
+    public void onApiChange(YouTubePlayer youTubePlayer) {
+
+    }
+
+    @Override
+    public void onCurrentSecond(YouTubePlayer youTubePlayer, float v) {
+
+    }
+
+    @Override
+    public void onError(YouTubePlayer youTubePlayer, PlayerConstants.PlayerError playerError) {
+
+    }
+
+    @Override
+    public void onPlaybackQualityChange(YouTubePlayer youTubePlayer, PlayerConstants.PlaybackQuality playbackQuality) {
+
+    }
+
+    @Override
+    public void onPlaybackRateChange(YouTubePlayer youTubePlayer, PlayerConstants.PlaybackRate playbackRate) {
+
+    }
+
+    @Override
+    public void onReady(YouTubePlayer youTubePlayer) {
+
+    }
+
+    @Override
+    public void onStateChange(YouTubePlayer youTubePlayer, PlayerConstants.PlayerState playerState) {
+
+    }
+
+    @Override
+    public void onVideoDuration(YouTubePlayer youTubePlayer, float v) {
+
+    }
+
+    @Override
+    public void onVideoId(YouTubePlayer youTubePlayer, String s) {
+
+    }
+
+    @Override
+    public void onVideoLoadedFraction(YouTubePlayer youTubePlayer, float v) {
+
+    }
+
+
+
 
 }
