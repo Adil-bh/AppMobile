@@ -92,16 +92,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <VideoView
-        android:id="@+id/video"
-        android:layout_width="330dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="48dp"
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/videoYT"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/side1" />
+        app:videoId="6K1nqPcLkZ4"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

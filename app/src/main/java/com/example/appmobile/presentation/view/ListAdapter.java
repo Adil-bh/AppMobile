@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appmobile.presentation.model.Matchs;
 import com.example.appmobile.R;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
          TextView txtHeader;
          TextView txtFooter;
          ImageView image;
-         VideoView video;
+         YouTubePlayerView video;
          View layout;
 
 
@@ -48,7 +50,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             txtHeader = (TextView) v.findViewById(R.id.firstLine);
             txtFooter = (TextView) v.findViewById(R.id.secondLine);
             image = (ImageView) v.findViewById(R.id.icon);
-            video = (VideoView) v.findViewById(R.id.video);
+            video = (YouTubePlayerView) v.findViewById(R.id.videoYT);
             myDialog = new Dialog(v.getContext());
 
         }
@@ -166,7 +168,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void showPopup(final Matchs currentMatch) {
         TextView title, date, side1, side2, txtclose;
         ImageView side1Image, side2Image;
-        VideoView video;
+        YouTubePlayerView videoYT;
         myDialog.setContentView(R.layout.custompopup);
 
         txtclose = (TextView) myDialog.findViewById(R.id.txtclose);
@@ -186,7 +188,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         side1Image = myDialog.findViewById(R.id.side1Image);
         side2Image = myDialog.findViewById(R.id.side2Image);
 
-        video = myDialog.findViewById(R.id.video);
+        videoYT = myDialog.findViewById(R.id.videoYT);
+        //videoYT.set
 
         side1.setText(currentMatch.getSide1().getName());
         side2.setText(currentMatch.getSide2().getName());

@@ -70,7 +70,10 @@ public class MainActivity extends Activity {
     }
 
     public void navigateToDetails(Matchs matchs) {
-        Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
-        MainActivity.this.startActivity(myIntent);
-    }
+
+                Intent myIntent = new Intent(MainActivity.this, DetailActivity.class);
+                MainActivity.this.startActivity(myIntent);
+        }
+
+
 }
