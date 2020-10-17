@@ -1,4 +1,4 @@
-# Application FootyResults
+# Application FootResults
 ## Présentation
 
 Projet application mobile utilisant la clean architecture et le pattern MVC codée en Java.
