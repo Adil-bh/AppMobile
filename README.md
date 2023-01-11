@@ -53,6 +53,6 @@ https://github.com/public-apis/public-apis
 
 ### Mise en cache des données
 - Lecture des vidéos depuis internet
-- Mise de en cache de la mémoire
+- Mise en cache de la mémoire
 
 
